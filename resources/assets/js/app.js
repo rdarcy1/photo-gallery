@@ -7,6 +7,12 @@ window.Vue = Vue;
 
 Vue.use(VueMasonry);
 
+Vue.component('app', AppComponent);
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    components: {
+        app: AppComponent
+    }
 });

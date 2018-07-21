@@ -21,8 +21,8 @@
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
+            body {
+                margin-top: 1rem;
             }
 
             .flex-center {
@@ -33,20 +33,6 @@
 
             .position-ref {
                 position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
             }
 
             .links > a {
@@ -62,6 +48,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            #app {
+                max-width: 800px;
+            }
         </style>
     </head>
     <body>
@@ -70,5 +60,7 @@
                 <app></app>
             </div>
         </div>
+
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
