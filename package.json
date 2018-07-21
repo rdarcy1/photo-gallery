@@ -20,6 +20,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "verge": "^1.10.2",
+        "vue-justified-layout": "^0.1.0",
         "vue-masonry-css": "^1.0.2"
     }
 }

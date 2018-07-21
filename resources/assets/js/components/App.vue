@@ -1,22 +1,29 @@
 <template>
     <div>
-        <masonry
-                :cols="4"
-                :gutter="20"
-        >
-            <div class="tile" :key="index" v-for="(item, index) in items">
-                <img :src="item.src">
-                <div class="overlay">
-                    <div class="overlay-text">
-                        Test
+        <justified-layout :items="items" :options="layoutOptions">
+            <template slot="inner" slot-scope="slotProps">
+                <div class="tile">
+                    <img :src="slotProps.item.url"/>
+                    <div class="overlay">
+                        <div class="overlay-text">
+                            Test
+                        </div>
                     </div>
                 </div>
-            </div>
-        </masonry>
+            </template>
+        </justified-layout>
+
+        <!--<div class="tile" :key="index" v-for="(item, index) in items">-->
+        <!--<img :src="item.src">-->
+
+        <!--</div>-->
     </div>
 </template>
 
 <script>
+    import JustifiedLayout from 'vue-justified-layout';
+    import verge from 'verge';
+
     function dimension(min, max) {
         return Math.round(Math.random() * (max - min) + min);
     }
@@ -24,16 +31,25 @@
     export default {
         data() {
             return {
-                items: []
+                items: [],
+                layoutOptions: {
+                    boxSpacing: 5,
+                    containerWidth: verge.viewportW(),
+                },
             };
+        },
+
+        components: {
+            JustifiedLayout
         },
 
         mounted() {
             let i;
             for (i = 0; i < 10; i++) {
-                let width = dimension(400, 800);
-                let height = dimension(100, 800);
-                this.items.push({ src: `http://via.placeholder.com/${width}x${height}` })
+                let width = dimension(100, 400);
+                let height = dimension(100, 400);
+                let url = `http://via.placeholder.com/${width}x${height}`;
+                this.items.push({ width, height, url });
             }
         }
     }
@@ -41,10 +57,6 @@
 
 <style lang="scss" scoped>
     .tile {
-        margin-bottom: 20px;
-        display: block;
-        position: relative;
-
         img {
             width: 100%;
         }
