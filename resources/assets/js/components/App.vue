@@ -1,8 +1,7 @@
 <template>
     <div>
         <justified-gallery></justified-gallery>
-        <lightbox :image="{src: `http://via.placeholder.com/400x600`}"></lightbox>
-        <lightbox :image="{src: `http://via.placeholder.com/1000x300`}"></lightbox>
+        <lightbox :image="{src: `http://via.placeholder.com/600x500`}"></lightbox>
     </div>
 </template>
 
