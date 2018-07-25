@@ -1,5 +1,8 @@
 export default {
     lightbox: {
-        show: false
-    }
+        show: false,
+        image: {}
+    },
+
+    images: [],
 };

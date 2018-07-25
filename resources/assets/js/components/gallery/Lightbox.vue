@@ -1,21 +1,30 @@
 <template>
     <div>
-        <div class="lightbox-close"></div>
+        <div class="lightbox-close" @click="hideLightbox"></div>
         <div class="lightbox-nav nav-left"><a></a></div>
         <div class="lightbox-nav nav-right"></div>
-        <div class="lightbox-container full-screen"></div>
+        <div class="lightbox-container full-screen"
+             :style="`background-image: url(${image.url}); background-size: contain`"
+        ></div>
         <div class="lightbox-background-overlay full-screen"></div>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['image'],
+    import { mapMutations, mapState } from 'vuex'
 
-        mounted() {
-            document.querySelector('.lightbox-container').style
-                .backgroundImage = `url(${this.image.src})`;
+    export default {
+        computed: {
+            ...mapState(['lightbox']),
+
+            image() {
+                return this.lightbox.image;
+            }
         },
+
+        methods: {
+            ...mapMutations(['hideLightbox'])
+        }
 
     }
 </script>

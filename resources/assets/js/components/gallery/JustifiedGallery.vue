@@ -1,7 +1,7 @@
 <template>
-    <justified-layout :items="items" :options="layoutOptions" id="justified-layout">
+    <justified-layout :items="images" :options="layoutOptions" id="justified-layout">
         <template slot="inner" slot-scope="{ item }">
-            <div class="tile">
+            <div class="tile" @click="activateLightbox(item)">
                 <img :src="item.url"/>
                 <div class="overlay">
                     <div class="overlay-text">
@@ -15,10 +15,7 @@
 
 <script>
     import JustifiedLayout from 'vue-justified-layout';
-
-    function dimension(min, max) {
-        return Math.round(Math.random() * (max - min) + min);
-    }
+    import { mapMutations, mapState } from 'vuex'
 
     export default {
         data() {
@@ -37,36 +34,31 @@
         },
 
         computed: {
+            ...mapState(['images']),
+
             containerWidth() {
                 return document.getElementById('justified-layout').getBoundingClientRect().width;
             }
         },
 
-        mounted() {
-            let i;
-            for (i = 0; i < 10; i++) {
-                let width = dimension(100, 400);
-                let height = dimension(100, 400);
-                this.items.push({
-                    width,
-                    height,
-                    url: `http://via.placeholder.com/${width}x${height}`,
-                    title: 'Lorem ipsum doler',
-                });
+        methods: {
+            ...mapMutations(['showLightbox']),
+            activateLightbox(item) {
+                this.showLightbox(item)
             }
-        }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
     .tile {
-    img {
-        width: 100%;
-    }
+        img {
+            width: 100%;
+        }
 
-    &:hover .overlay {
-         opacity: 1;
-     }
+        &:hover .overlay {
+            opacity: 1;
+        }
     }
 
     .overlay {
