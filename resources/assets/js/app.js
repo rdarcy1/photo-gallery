@@ -30,6 +30,7 @@ const app = new Vue({
             let width = dimension(1000, 2000);
             let height = dimension(1000, 2000);
             items.push({
+                index: i + 1,
                 width,
                 height,
                 url: `http://via.placeholder.com/${width}x${height}`,

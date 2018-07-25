@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="lightbox-close" @click="hideLightbox"></div>
-        <div class="lightbox-nav nav-left"><a></a></div>
-        <div class="lightbox-nav nav-right"></div>
+        <div class="lightbox-nav nav-left" @click="previousImage"></div>
+        <div class="lightbox-nav nav-right" @click="nextImage"></div>
         <div class="lightbox-container full-screen"
              :style="`background-image: url(${image.url}); background-size: contain`"
         ></div>
@@ -23,7 +23,7 @@
         },
 
         methods: {
-            ...mapMutations(['hideLightbox'])
+            ...mapMutations(['hideLightbox', 'nextImage', 'previousImage'])
         }
 
     }
@@ -75,7 +75,6 @@
 
     .lightbox-container {
         text-align: center;
-        background-size: contain;
         background: no-repeat center;
         z-index: 1000;
 
@@ -86,6 +85,5 @@
 
     .lightbox-background-overlay {
         background-color: rgba(0, 0, 0, 0.5);
-
     }
 </style>
