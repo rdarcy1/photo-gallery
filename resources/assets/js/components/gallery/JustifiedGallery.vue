@@ -24,7 +24,7 @@
                 layoutOptions: {
                     boxSpacing: 2,
                     containerWidth: this.containerWidth,
-                    targetRowHeight: 200,
+                    targetRowHeight: 400,
                 },
             };
         },

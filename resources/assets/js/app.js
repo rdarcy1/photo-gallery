@@ -24,6 +24,11 @@ const app = new Vue({
     },
 
     mounted() {
+        window.addEventListener('keydown', event => {
+            window.Event.fire('keydown', event);
+        });
+
+
         let items = [];
         let i;
         for (i = 0; i < 100; i++) {
@@ -33,7 +38,8 @@ const app = new Vue({
                 index: i + 1,
                 width,
                 height,
-                url: `http://via.placeholder.com/${width}x${height}`,
+                url: `https://picsum.photos/${width}/${height}?random`,
+                // url: `https://via.placeholder.com/${width}x${height}`,
                 title: 'Lorem ipsum doler',
             });
         }

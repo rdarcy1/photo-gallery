@@ -23,9 +23,20 @@
         },
 
         methods: {
-            ...mapMutations(['hideLightbox', 'nextImage', 'previousImage'])
-        }
+            ...mapMutations(['hideLightbox', 'nextImage', 'previousImage']),
+        },
 
+        mounted() {
+            window.Event.listen('keydown', ({ code }) => {
+                if (code === 'ArrowLeft') {
+                    this.previousImage()
+                } else if (code === 'ArrowRight') {
+                    this.nextImage();
+                } else if (code === 'Escape') {
+                    this.hideLightbox();
+                }
+            })
+        }
     }
 </script>
 

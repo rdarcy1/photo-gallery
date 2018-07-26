@@ -1,7 +1,9 @@
 import lodash from 'lodash'
 import Vuex from 'vuex'
 import Vue from "vue";
+import Event from './support/Event'
 
+window.Event = new Event;
 window._ = lodash;
 window.Popper = require('popper.js').default;
 window.vuex = Vuex;
