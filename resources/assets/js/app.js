@@ -31,7 +31,7 @@ const app = new Vue({
 
         let items = [];
         let i;
-        for (i = 0; i < 100; i++) {
+        for (i = 0; i < 10; i++) {
             let width = dimension(1000, 2000);
             let height = dimension(1000, 2000);
             items.push({

@@ -1,20 +1,19 @@
 <template>
     <div>
+        <gallery-header></gallery-header>
         <justified-gallery></justified-gallery>
-        <lightbox
-                :image="{src: `http://via.placeholder.com/600x500`}"
-                v-show="lightbox.show"
-        ></lightbox>
+        <lightbox v-show="lightbox.show"></lightbox>
     </div>
 </template>
 
 <script>
     import JustifiedGallery from './gallery/JustifiedGallery'
     import Lightbox from './gallery/Lightbox'
+    import GalleryHeader from './gallery/GalleryHeader'
     import { mapState } from 'vuex'
 
     export default {
-        components: { JustifiedGallery, Lightbox },
+        components: { JustifiedGallery, Lightbox, GalleryHeader },
 
         computed: {
             ...mapState(['lightbox'])

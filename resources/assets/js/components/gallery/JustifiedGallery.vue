@@ -24,6 +24,7 @@
                 layoutOptions: {
                     boxSpacing: 2,
                     containerWidth: this.containerWidth,
+                    containerPadding: 2,
                     targetRowHeight: 400,
                 },
             };
@@ -73,6 +74,7 @@
         width: 100%;
         height: 100%;
         text-align: center;
+        cursor: pointer;
     }
 
     .overlay-text {
