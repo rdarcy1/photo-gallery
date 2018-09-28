@@ -4,5 +4,10 @@ export default {
         image: {}
     },
 
-    images: [],
+    images: [
+        // {
+        //     title: '',
+        //     url: '',
+        // }
+    ],
 };
