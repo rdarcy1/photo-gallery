@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use STS\Filesystem\VfsFilesystemServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment() === 'testing') {
+            $this->app->register(VfsFilesystemServiceProvider::class);
+        }
     }
 }
