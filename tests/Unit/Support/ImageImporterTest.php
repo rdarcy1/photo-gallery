@@ -31,6 +31,8 @@ class ImageImporterTest extends DatabaseTestCase
             ->fromDirectory($directory);
 
         $this->assertSame(2, $album->images()->count());
-
+        foreach ($album->images as $image) {
+            $this->assertInstanceOf(Media::class, $image->getFirstMedia());
+        }
     }
 }

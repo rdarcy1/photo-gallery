@@ -3,11 +3,8 @@
 namespace App\Support;
 
 use App\Models\Album;
-use Illuminate\Filesystem\FilesystemAdapter;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use Ramsey\Uuid\Uuid;
-use Storage;
 
 class ImageImporter
 {
@@ -42,6 +39,8 @@ class ImageImporter
 
         foreach ($filesystem->listContents() as $file) {
             $imageModel = $this->album->images()->create();
+
+            $imageModel->attachImageFile($directory . DIRECTORY_SEPARATOR . $file['basename']);
         }
     }
 }
