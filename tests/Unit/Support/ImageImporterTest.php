@@ -4,6 +4,7 @@ namespace Tests\Unit\Support;
 
 use App\Models\Album;
 use App\Support\ImageImporter;
+use Spatie\MediaLibrary\Models\Media;
 use Tests\DatabaseTestCase;
 
 class ImageImporterTest extends DatabaseTestCase
@@ -23,23 +24,13 @@ class ImageImporterTest extends DatabaseTestCase
     {
         $album = factory(Album::class)->create();
 
-        $this->copyFilesToVfs();
+        $directory = base_path('tests/Support/stubs/images/album01');
 
         $this->importer
-            ->setDisk('vfs')
             ->setAlbum($album)
-            ->fromDirectory('album01');
+            ->fromDirectory($directory);
 
         $this->assertSame(2, $album->images()->count());
-    }
 
-    protected function copyFilesToVfs()
-    {
-        $directory = base_path('tests/Support/stubs/images/album01');
-        $files = array_diff(scandir($directory), ['.', '..']);
-        foreach ($files as $file) {
-            \Storage::disk('vfs')
-                ->put('album01/' . $file, file_get_contents($directory . '/' . $file));
-        }
     }
 }
