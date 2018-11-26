@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AlbumController@index')->name('albums.index');
+Route::get('album/{album}', 'AlbumController@show')->name('album.show');
