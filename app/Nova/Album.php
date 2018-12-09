@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
@@ -47,7 +48,8 @@ class Album extends Resource
             ID::make()->sortable(),
             Text::make('Title')->sortable(),
             Text::make('Description')->sortable(),
-            BelongsTo::make('User')->nullable(),
+            BelongsTo::make('User')->searchable()->nullable(),
+            HasMany::make('Images'),
         ];
     }
 

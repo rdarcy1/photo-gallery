@@ -48,7 +48,7 @@ class Image extends Resource
             Text::make('Description')->sortable(),
             ImageField::make('File')
                 ->store(function (Request $request, \App\Models\Image $image) {
-                    $image->addMediaFromRequest('file')->toMediaCollection();
+                    $image->addMedia($request->file('file'))->toMediaCollection();
 
                     return true;
                 })
@@ -57,7 +57,7 @@ class Image extends Resource
                 })->thumbnail(function () {
                     return $this->model()->getFirstMediaUrl();
                 }),
-            BelongsTo::make('Album')->nullable(),
+            BelongsTo::make('Album')->searchable()->nullable(),
         ];
     }
 
