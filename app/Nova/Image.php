@@ -48,9 +48,14 @@ class Image extends Resource
             Text::make('Description')->sortable(),
             ImageField::make('File')
                 ->store(function (Request $request, \App\Models\Image $image) {
-                     $image->addMediaFromRequest('file')->toMediaCollection();
+                    $image->addMediaFromRequest('file')->toMediaCollection();
 
-                     return [];
+                    return true;
+                })
+                ->preview(function () {
+                    return $this->model()->getFirstMediaUrl();
+                })->thumbnail(function () {
+                    return $this->model()->getFirstMediaUrl();
                 }),
             BelongsTo::make('Album')->nullable(),
         ];
