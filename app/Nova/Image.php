@@ -2,21 +2,20 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\HasOne;
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image as ImageField;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Album extends Resource
+class Image extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Album::class;
+    public static $model = \App\Models\Image::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -32,13 +31,13 @@ class Album extends Resource
      */
     public static $search = [
         'title',
-        'description'
+        'description',
     ];
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
@@ -47,14 +46,20 @@ class Album extends Resource
             ID::make()->sortable(),
             Text::make('Title')->sortable(),
             Text::make('Description')->sortable(),
-            BelongsTo::make('User')->nullable(),
+            ImageField::make('File')
+                ->store(function (Request $request, \App\Models\Image $image) {
+                     $image->addMediaFromRequest('file')->toMediaCollection();
+
+                     return [];
+                }),
+            BelongsTo::make('Album')->nullable(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -65,7 +70,7 @@ class Album extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -76,7 +81,7 @@ class Album extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -87,7 +92,7 @@ class Album extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)
